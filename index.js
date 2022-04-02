@@ -4,7 +4,11 @@ const fs = require("fs");
 const results = [];
 
 fs.createReadStream("./cumulative_2022.04.02_04.42.57.csv").
-on("data", (data) => {
+pipe(parse({
+    comment: '#',
+    columns: true
+}))
+.on("data", (data) => {
     results.push(data);
   }
 )
